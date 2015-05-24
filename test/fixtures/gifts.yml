@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sender_no: 1
+  reciever_no: 1
+  point: 1
+  description: MyString
+  staff_id: 1
+
+two:
+  sender_no: 1
+  reciever_no: 1
+  point: 1
+  description: MyString
+  staff_id: 1

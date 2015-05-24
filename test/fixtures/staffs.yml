@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  'no': 1
+  name: MyString
+  point: 1
+  gender: MyString
+  description: MyString
+
+two:
+  'no': 1
+  name: MyString
+  point: 1
+  gender: MyString
+  description: MyString
