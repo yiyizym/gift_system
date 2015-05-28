@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  face_value: 1
+  owner: MyString
+  holder: MyString
+  publish_date: MyString
+  transfer_date: MyString
+  exchange_date: MyString
+
+two:
+  face_value: 1
+  owner: MyString
+  holder: MyString
+  publish_date: MyString
+  transfer_date: MyString
+  exchange_date: MyString
