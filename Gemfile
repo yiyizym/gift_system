@@ -43,7 +43,7 @@ gem 'cancancan', '~> 1.10'
 gem 'therubyracer'
 
 # use twitter bootstrap css & javascript toolkit
-gem 'twitter-bootswatch-rails', :github => 'scottvrosenthal/twitter-bootswatch-rails'
+#gem 'twitter-bootswatch-rails', :github => 'scottvrosenthal/twitter-bootswatch-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
