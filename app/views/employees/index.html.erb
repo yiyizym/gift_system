@@ -5,9 +5,10 @@
 			<th>#</th>
 			<th>工号</th>
 			<th>姓名</th>
-			<th>获赠</th>
+			<th>岗位</th>
+			<!-- <th>获赠</th>
 			<th>可送</th>
-			<th>可用</th>
+			<th>可用</th> -->
 		</tr>
 	</thead>
 	<tbody>
@@ -17,9 +18,10 @@
 			<td><%= index + 1 %></td>
 			<td><%= e.no %></td>
 			<td><%= e.name %></td>
-			<td>find_get_coins(e.id)</td>
+			<td><%= e.title %></td>
+			<!-- <td>find_get_coins(e.id)</td>
 			<td>find_can_give_out_coins(e.id)</td>
-			<td>find_can_exchange_coins(e.id)</td>
+			<td>find_can_exchange_coins(e.id)</td> -->
 		</tr>
 		<% end %>
 	</tbody>
@@ -97,9 +99,14 @@
 					type: "GET",
 					dataType: "json",
 					success: function(resp){
-			// 			tpl += "<tr class='info'>" +
-			// 							"<td>" +  + "</td>" +
-
+						tpl = _.map(resp, function(item){
+							return "<tr class='info'>" +
+												"<td>" + item.id + "</td>" +
+												"<td>" + item.no + "</td>" +
+												"<td>" + item.name + "</td>" +
+												"<td>" + item.title + "</td>"
+						}).join("");
+						$employeesTable.find("tbody").html(tpl);
 
 					}
 				})
