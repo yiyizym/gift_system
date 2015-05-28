@@ -28,6 +28,11 @@
 </table>
 
 
+<ul ms-controller="test">
+	<li ms-repeat="arr">{{el.no}}/{{el.name}}</li>
+</ul>
+
+
 <div class="modal" id="add-employee-modal">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -86,7 +91,6 @@
 <% content_for :page_javascript do %>
 <script>
 	$(function(){
-			// console.log(">>>page_javascript loaded!");
 			var $add = $(".add-employee");
 			var $addEmployeeForm = $(".add-employee-form");
 			var $addEmployeeDialog = $("#add-employee-modal");
@@ -129,8 +133,21 @@
 
 				return false;
 			});
-			// $add.on("click.add-employee", function(event){
-			// });
+
+			var model = window.model = avalon.define({
+				$id : "test",
+				arr : []
+			});
+
+
+			$.ajax({
+				url: "/employees",
+				type: "GET",
+				dataType: "json",
+				success: function(resp){
+					model.arr = resp;
+				}
+			})
 
 });
 </script>
