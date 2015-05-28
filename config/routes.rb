@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :employees
+  resources :employees do
+    collection do
+      get :refresh
+    end
+  end
+
   resources :coins
   resources :publishes
 
