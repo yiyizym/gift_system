@@ -2,35 +2,26 @@
 <table class="table table-striped table-hover employees-table">
 	<thead>
 		<tr>
-			<th>#</th>
 			<th>工号</th>
 			<th>姓名</th>
-			<th>岗位</th>
-			<!-- <th>获赠</th>
-			<th>可送</th>
-			<th>可用</th> -->
+			<!-- <th>岗位</th> -->
+			<th>持有</th>
+			<th>获赠</th>
+			<!-- <th>可用</th> -->
 		</tr>
 	</thead>
-	<tbody>
-
-		<% @employees.each_with_index do |e,index| %>
-		<tr class="info">
-			<td><%= index + 1 %></td>
-			<td><%= e.no %></td>
-			<td><%= e.name %></td>
-			<td><%= e.title %></td>
+	<tbody ms-controller="employees" class="ms-controller">
+		<tr class="info" ms-repeat="list">
+			<td>{{el.no}}</td>
+			<td>{{el.name}}</td>
+			<td></td>
+			<td></td>
 			<!-- <td>find_get_coins(e.id)</td>
 			<td>find_can_give_out_coins(e.id)</td>
 			<td>find_can_exchange_coins(e.id)</td> -->
 		</tr>
-		<% end %>
 	</tbody>
 </table>
-
-
-<ul ms-controller="test">
-	<li ms-repeat="arr">{{el.no}}/{{el.name}}</li>
-</ul>
 
 
 <div class="modal" id="add-employee-modal">
@@ -91,31 +82,8 @@
 <% content_for :page_javascript do %>
 <script>
 	$(function(){
-			var $add = $(".add-employee");
 			var $addEmployeeForm = $(".add-employee-form");
 			var $addEmployeeDialog = $("#add-employee-modal");
-			var $employeesTable = $(".employees-table");
-
-			$employeesTable.on("refresh.employees", function(){
-				var tpl = "";
-				$.ajax({
-					url: "/employees",
-					type: "GET",
-					dataType: "json",
-					success: function(resp){
-						tpl = _.map(resp, function(item){
-							return "<tr class='info'>" +
-												"<td>" + item.id + "</td>" +
-												"<td>" + item.no + "</td>" +
-												"<td>" + item.name + "</td>" +
-												"<td>" + item.title + "</td>"
-						}).join("");
-						$employeesTable.find("tbody").html(tpl);
-
-					}
-				})
-			})
-
 
 			$addEmployeeForm.on("submit", function(event){
 				var $form = $(this);
@@ -124,7 +92,15 @@
 					data: $form.serialize(),
 					type: "POST",
 					success: function(resp){
-						$employeesTable.trigger("refresh.employees");
+						$.ajax({
+							url: "/employees",
+							type: "GET",
+							dataType: "json",
+							success: function(resp){
+								model.list = resp;
+							}
+						});
+
 					},
 					complete: function(resp){
 						$addEmployeeDialog.modal("hide");
@@ -134,21 +110,15 @@
 				return false;
 			});
 
+			var list =  <%= @employees.to_json.html_safe %>;
+
 			var model = window.model = avalon.define({
-				$id : "test",
-				arr : []
+				$id : "employees",
+				list : list
 			});
 
 
-			$.ajax({
-				url: "/employees",
-				type: "GET",
-				dataType: "json",
-				success: function(resp){
-					model.arr = resp;
-				}
-			})
-
+			
 });
 </script>
 <% end %>
