@@ -50,6 +50,10 @@ gem 'twitter-bootswatch-rails', :github => 'scottvrosenthal/twitter-bootswatch-r
 
 gem 'underscore-rails', '~> 1.8.2'
 
+# serializer
+gem 'active_model_serializers'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

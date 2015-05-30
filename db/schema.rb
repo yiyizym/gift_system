@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528173930) do
+ActiveRecord::Schema.define(version: 20150530025402) do
 
   create_table "coins", force: :cascade do |t|
     t.integer  "face_value",    limit: 5
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20150528173930) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "own_coins"
+    t.integer  "get_coins"
   end
 
   create_table "gifts", force: :cascade do |t|
