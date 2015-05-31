@@ -44,9 +44,12 @@ class EmployeesController < ApplicationController
 	end
 
 	private
+	
 	def set_employee
 		@employee = Employee.find(params[:id])
 	end
+
+
 
 	def employee_params
 		params.permit(:id, :no, :name, :own_coins, :get_coins)

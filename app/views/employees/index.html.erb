@@ -3,8 +3,8 @@
 		<tr>
 			<th>工号</th>
 			<th>姓名</th>
-			<th>持有</th>
-			<th>获赠</th>
+			<th>可用持有</th>
+			<th>可用获赠</th>
 			<th>操作</th>
 		</tr>
 	</thead>
@@ -96,7 +96,7 @@
 				},
 				deleteEmployee: function(el){
 					if (el.id) {
-						submitDelete(el);
+						model.submitDelete(el);
 					} else{
 						model.list.pop();
 					}

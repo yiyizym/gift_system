@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :coins
   resources :publishes
+  resources :presents
+  resources :exchanges
 
   root to: 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
