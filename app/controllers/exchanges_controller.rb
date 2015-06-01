@@ -1,5 +1,4 @@
 class ExchangesController < ApplicationController
-	layout "yeti"
 	before_action :set_exchange, only: [:update, :destroy]
 
 	def index

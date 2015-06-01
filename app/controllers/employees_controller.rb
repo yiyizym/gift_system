@@ -1,5 +1,4 @@
 class EmployeesController < ApplicationController
-	layout "yeti"
 	before_action :set_employee , only: [:update, :destroy]
 	def index
 		@employees = Employee.select("id, no, name, own_coins, get_coins")

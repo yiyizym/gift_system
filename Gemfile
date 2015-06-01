@@ -43,7 +43,7 @@ gem 'cancancan', '~> 1.10'
 gem 'therubyracer'
 
 # use twitter bootstrap css & javascript toolkit
-#gem 'twitter-bootswatch-rails', :github => 'scottvrosenthal/twitter-bootswatch-rails'
+gem 'twitter-bootswatch-rails', :github => 'scottvrosenthal/twitter-bootswatch-rails'
 
 
 # undescore
@@ -52,6 +52,9 @@ gem 'underscore-rails', '~> 1.8.2'
 
 # serializer
 gem 'active_model_serializers'
+
+# datepicker
+gem 'bootstrap-datepicker-rails'
 
 
 group :development, :test do
