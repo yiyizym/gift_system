@@ -1,8 +1,6 @@
 class ChangeOwnerHolderOfCoins < ActiveRecord::Migration
   def change
-  	change_table :coins do |t|
-  		t.change :owner, :integer
-  		t.change :holder, :integer
-  	end
+  	change_column :coins, :owner, 'integer USING CAST("owner" AS integer)'
+  	change_column :coins, :holder, 'integer USING CAST("holder" AS integer)'
   end
 end
