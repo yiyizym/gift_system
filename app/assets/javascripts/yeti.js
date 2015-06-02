@@ -6,3 +6,4 @@
 //= require yeti/bootswatch
 //= require underscore
 //= require avalon/avalon.modern.shim.js
+//= require bootstrap-datepicker

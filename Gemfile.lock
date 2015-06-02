@@ -51,6 +51,8 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.4.0)
+      railties (>= 3.0)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -181,6 +183,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  bootstrap-datepicker-rails
   byebug
   cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)

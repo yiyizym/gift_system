@@ -10,10 +10,10 @@
 		</tr>
 	</thead>
 	<tbody >
-		<tr class="present-item" ms-repeat="presentsList">
+		<tr class="present-item" ms-repeat="presentsList" data-repeat-rendered="initializeDatePicker">
 			<td>
 				<span ms-visible="editShow !== $index && el.id">{{el.transfer_date}}</span>
-				<input type="text" ms-visible="editShow === $index || !el.id" ms-duplex="el.transfer_date">
+				<input type="text" ms-visible="editShow === $index || !el.id" ms-duplex="el.transfer_date" class="datepicker" placeholder="选择日期">
 			</td>
 			<td>
 				<span ms-visible="editShow !== $index && el.id">{{el.from_employee_name}}</span>
@@ -80,7 +80,7 @@
 							type: "GET",
 							dataType: "json",
 							success: function(resp){
-								model.presentsList = resp;
+								model.presentsList = resp.presents;
 							}
 						});
 
@@ -139,7 +139,25 @@
 					var no = +$event.target.value;
 					var name = _.findWhere(employeesList, {no: no}).name;
 					el.to_employee_name = name;
+				},
+
+				initializeDatePicker: function(action,offset, length){
+					var me = this;
+					if (action == 'add') {
+						console.log(">>>> to initialize datepicker");
+						$(me).find('tr').eq(offset).find('.datepicker').datepicker({
+							format: 'yyyy-mm-dd',
+							autoclose: true,
+							language: 'zh-CN',
+							orientation: 'top left'
+
+						}).on('changeDate', function(e){
+							console.log('>>> dateChange.');
+						});
+							
+					}
 				}
+
 			});
 
 

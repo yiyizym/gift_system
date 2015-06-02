@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531140407) do
+ActiveRecord::Schema.define(version: 20150602133121) do
 
   create_table "coins", force: :cascade do |t|
     t.integer  "face_value",    limit: 5, default: 10
     t.integer  "owner"
     t.integer  "holder"
     t.string   "description"
-    t.datetime "publish_date"
-    t.datetime "transfer_date"
-    t.datetime "exchange_date"
+    t.date     "publish_date"
+    t.date     "transfer_date"
+    t.date     "exchange_date"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "publish_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150531140407) do
   end
 
   create_table "exchanges", force: :cascade do |t|
-    t.datetime "exchange_date"
+    t.date     "exchange_date"
     t.integer  "holder_no"
     t.string   "holder_name"
     t.integer  "coin_num"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20150531140407) do
   end
 
   create_table "presents", force: :cascade do |t|
-    t.datetime "transfer_date"
+    t.date     "transfer_date"
     t.integer  "from_employee_no"
     t.string   "from_employee_name"
     t.integer  "to_employee_no"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20150531140407) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "coin_num"
-    t.datetime "publish_date"
+    t.date     "publish_date"
   end
 
   create_table "staffs", force: :cascade do |t|
