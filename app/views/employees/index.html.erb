@@ -36,7 +36,7 @@
 		<tr>
 			<td colspan="5">
 				<button type="button" class="btn btn-primary add-employee" ms-click="newEmployee">增加员工</button>
-				
+				<div ms-include-src="url"></div>
 			</td>
 		</tr>
 	</tfoot>
@@ -46,6 +46,7 @@
 
 
 <% content_for :page_javascript do %>
+
 <script>
 	$(function(){
 			var $addEmployeeForm = $(".add-employee-form");
@@ -80,6 +81,7 @@
 			var list =  <%= @employees.to_json.html_safe %>;
 
 			var model = window.model = avalon.define({
+				url : '<%= asset_path("ap.html") %>',
 				$id : "employees",
 				list : list,
 				editShow : '',

@@ -1,5 +1,4 @@
 class PublishesController < ApplicationController
-	layout "yeti"
 	before_action :set_publish, only: [:update, :destroy]
 	def index
 		@employees = Employee.select("id, no, name")

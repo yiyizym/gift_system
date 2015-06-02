@@ -1,5 +1,4 @@
 class PresentsController < ApplicationController
-	layout "yeti"
 	before_action :set_present, only: [:update, :destroy]
 	def index
 		@employees = Employee.select("id, no, name")
@@ -19,6 +18,7 @@ class PresentsController < ApplicationController
 				@present.save!
 				Coin.add_transfer(@present.id, @present.from_employee_no, @present.to_employee_no,  @present.transfer_date, @present.coin_num)
 				Employee.find_by_no(@present.to_employee_no).add_get_coins(@present.coin_num)
+				Employee.find_by_no(@present.from_employee_no).reduce_own_coins(@present.coin_num)
 			end
 
 			respond_to do |format|
@@ -39,6 +39,7 @@ class PresentsController < ApplicationController
 				@present.update!(present_params)
 				Coin.update_transfer(@present.id, @present.from_employee_no, @present.to_employee_no, @present.transfer_date, @present.coin_num)
 				Employee.find_by_no(@present.to_employee_no).update_get_coins(oldCoinNum, @present.coin_num)
+				Employee.find_by_no(@present.from_employee_no).update_own_coins(oldCoinNum, @present.coin_num)
 			end
 
 			respond_to do |format|
@@ -57,6 +58,7 @@ class PresentsController < ApplicationController
 		# 要删除干净
 		if @present.transaction do
 				Employee.find_by_no(@present.to_employee_no).delete_get_coins(@present.coin_num)
+				Employee.find_by_no(@present.from_employee_no).add_own_coins(@present.coin_num)
 				Coin.reset_get_coins(@present.id)
 				@present.destroy!
 			end

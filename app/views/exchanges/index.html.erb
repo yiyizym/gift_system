@@ -24,7 +24,7 @@
 			</td>
 			<td>
 				<span ms-visible="editShow !== $index && el.id">{{el.coin_num}}</span>
-				<input type="text" ms-visible="editShow === $index || !el.id" ms-duplex="el.coin_num">
+				<input type="text" ms-visible="editShow === $index || !el.id" ms-duplex-morethan="el.coin_num"  data-duplex-morethan="0">
 			</td>
 			<td>
 				<span ms-visible="editShow !== $index && el.id">{{el.gifts}}</span>
@@ -143,6 +143,17 @@
 				}
 
 			});
+
+			//这个钩子不错
+			avalon.duplexHooks.morethan = {
+				get : function(str, data){
+					var morethan = parseInt(data.element.getAttribute("data-duplex-morethan"));
+                    if (parseInt(str) <= morethan) {
+                        return data.element.value = "1";
+                    }
+                    return str;
+				}
+			};
 
 
 			
