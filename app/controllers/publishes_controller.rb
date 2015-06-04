@@ -1,4 +1,5 @@
 class PublishesController < ApplicationController
+	before_action :authenticate_user!
 	before_action :set_publish, only: [:update, :destroy]
 	def index
 		@employees = Employee.select("id, no, name")

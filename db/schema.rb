@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20150602133121) do
 
   create_table "coins", force: :cascade do |t|
     t.integer  "face_value",    limit: 5, default: 10
-    t.integer  "owner"
-    t.integer  "holder"
+    t.string   "owner"
+    t.string   "holder"
     t.string   "description"
     t.date     "publish_date"
     t.date     "transfer_date"
