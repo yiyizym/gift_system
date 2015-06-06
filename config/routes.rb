@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   resources :publishes
   resources :presents
   resources :exchanges
+  resources :home do
+    collection do
+      get :download
+    end
+  end
 
   root to: 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -3,11 +3,11 @@ class Publish < ActiveRecord::Base
 
 	validates :coin_num, numericality: { only_integer: true, greater_than: 0 }
 
-	before_create :set_publish_date_to_now
+	before_create :set_default_publish_date
 
 	private
 
-	def set_publish_date_to_now
-		self.publish_date = Time.now
+	def set_default_publish_date
+		self.publish_date = self.publish_date || Time.now
 	end
 end

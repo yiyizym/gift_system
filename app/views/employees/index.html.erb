@@ -5,7 +5,7 @@
 			<th>姓名</th>
 			<th>可用持有</th>
 			<th>可用获赠</th>
-			<th>操作</th>
+			<% if user_signed_in? %><th>操作</th><% end %>
 		</tr>
 	</thead>
 	<tbody >
@@ -24,14 +24,17 @@
 			<td>
 				<span>{{el.get_coins}}</span>
 			</td>
+			<% if user_signed_in? %>
 			<td>
 				<button type="button" class="btn btn-default" ms-visible="editShow !== $index && el.id" ms-click="toggleEdit($index)">{{ '编辑' }}</button>
 				<button type="button" class="btn btn-default" ms-visible="editShow === $index && el.id" ms-click="submitEdit(el),toggleEdit('')">{{ '确定' }}</button>
 				<button type="button" class="btn btn-default" ms-visible="!el.id" ms-click="submitNew(el),toggleEdit('')">{{ '确定' }}</button>
 				<button type="button" class="btn btn-default" ms-click="deleteEmployee(el)">{{ '删除' }}</button>
 			</td>
+			<% end %>
 		</tr>
 	</tbody>
+	<% if user_signed_in? %>
 	<tfoot>
 		<tr>
 			<td colspan="5">
@@ -39,6 +42,7 @@
 			</td>
 		</tr>
 	</tfoot>
+	<% end %>
 </table>
 
 

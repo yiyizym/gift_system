@@ -5,7 +5,7 @@
 			<th>兑换人</th>
 			<th>兑换数量</th>
 			<th>兑换礼品</th>
-			<th>操作</th>
+			<% if user_signed_in? %><th>操作</th><% end %>
 		</tr>
 	</thead>
 	<tbody >
@@ -30,22 +30,25 @@
 				<span ms-visible="editShow !== $index && el.id">{{el.gifts}}</span>
 				<input type="text" ms-visible="editShow === $index || !el.id" ms-duplex="el.gifts">
 			</td>
+			<% if user_signed_in? %>
 			<td>
 				<button type="button" class="btn btn-default" ms-visible="editShow !== $index && el.id" ms-click="toggleEdit($index)">{{ '编辑' }}</button>
 				<button type="button" class="btn btn-default" ms-visible="editShow === $index && el.id" ms-click="submitEdit(el),toggleEdit('')">{{ '确定' }}</button>
 				<button type="button" class="btn btn-default" ms-visible="!el.id" ms-click="submitNew(el),toggleEdit('')">{{ '确定' }}</button>
 				<button type="button" class="btn btn-default" ms-click="deleteExchange(el)">{{ '删除' }}</button>
 			</td>
+			<% end %>
 		</tr>
 	</tbody>
+	<% if user_signed_in? %>
 	<tfoot>
 		<tr>
 			<td colspan="5">
 				<button type="button" class="btn btn-primary add-exchange" ms-click="newExchange">添加兑换记录</button>
-				
 			</td>
 		</tr>
 	</tfoot>
+	<% end %>
 </table>
 
 
@@ -128,15 +131,12 @@
 				initializeDatePicker: function(action,offset, length){
 					var me = this;
 					if (action == 'add') {
-						console.log(">>>> to initialize datepicker");
 						$(me).find('tr').eq(offset).find('.datepicker').datepicker({
 							format: 'yyyy-mm-dd',
 							autoclose: true,
 							language: 'zh-CN',
 							orientation: 'top left'
 
-						}).on('changeDate', function(e){
-							console.log('>>> dateChange.');
 						});
 							
 					}

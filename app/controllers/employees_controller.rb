@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user! , except: [:index]
 	before_action :set_employee , only: [:update, :destroy]
 	def index
 		@employees = Employee.select("id, no, name, own_coins, get_coins")

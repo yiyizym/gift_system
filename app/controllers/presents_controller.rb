@@ -1,5 +1,5 @@
 class PresentsController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:index]
 	before_action :set_present, only: [:update, :destroy]
 	def index
 		@employees = Employee.select("id, no, name")
