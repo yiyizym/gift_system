@@ -11,7 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524101951) do
+ActiveRecord::Schema.define(version: 20150602133121) do
+
+  create_table "coins", force: :cascade do |t|
+    t.integer  "face_value",    limit: 5, default: 10
+    t.string   "owner"
+    t.string   "holder"
+    t.string   "description"
+    t.date     "publish_date"
+    t.date     "transfer_date"
+    t.date     "exchange_date"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "publish_id"
+    t.integer  "transfer_id"
+    t.integer  "exchange_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "no"
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "own_coins"
+    t.integer  "get_coins"
+  end
+
+  create_table "exchanges", force: :cascade do |t|
+    t.date     "exchange_date"
+    t.integer  "holder_no"
+    t.string   "holder_name"
+    t.integer  "coin_num"
+    t.string   "gifts"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "gifts", force: :cascade do |t|
     t.integer  "sender_no"
@@ -21,6 +56,27 @@ ActiveRecord::Schema.define(version: 20150524101951) do
     t.integer  "staff_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "presents", force: :cascade do |t|
+    t.date     "transfer_date"
+    t.integer  "from_employee_no"
+    t.string   "from_employee_name"
+    t.integer  "to_employee_no"
+    t.string   "to_employee_name"
+    t.string   "description"
+    t.integer  "coin_num"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "publishes", force: :cascade do |t|
+    t.string   "employee_name"
+    t.integer  "employee_no"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "coin_num"
+    t.date     "publish_date"
   end
 
   create_table "staffs", force: :cascade do |t|
@@ -35,6 +91,13 @@ ActiveRecord::Schema.define(version: 20150524101951) do
   end
 
   add_index "staffs", ["no"], name: "index_staffs_on_no", unique: true
+
+  create_table "systems", force: :cascade do |t|
+    t.string   "name"
+    t.string   "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -1,0 +1,29 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "员工管理") do |sheet|
+  sheet.add_row ['工号', '姓名', '可用持有', '可用获赠']
+  @employees.each do |employee|
+    sheet.add_row [employee.no, employee.name, employee.own_coins, employee.get_coins]
+  end
+end
+
+wb.add_worksheet(name: "蓝箭币发行") do |sheet|
+  sheet.add_row ['发行日期', '持有人', '数量']
+  @publishes.each do |publish|
+    sheet.add_row [publish.publish_date, publish.employee_name, publish.coin_num]
+  end
+end
+
+wb.add_worksheet(name: "蓝箭币赠送") do |sheet|
+  sheet.add_row ['赠送日期', '持有人', '受赠人', '赠言', '赠送数量']
+  @presents.each do |present|
+    sheet.add_row [present.transfer_date, present.from_employee_name, present.to_employee_name, present.description, present.coin_num]
+  end
+end
+
+wb.add_worksheet(name: "兑换礼品") do |sheet|
+  sheet.add_row ['兑换日期', '兑换人', '兑换数量', '兑换礼品']
+  @exchanges.each do |exchange|
+    sheet.add_row [exchange.exchange_date, exchange.holder_name, exchange.coin_num, exchange.gifts]
+  end
+end
