@@ -3,4 +3,6 @@
  *= require_self
  *= require yeti/loader
  *= require yeti/bootswatch
+ *= require base
+ *= require bootstrap-datepicker
 */

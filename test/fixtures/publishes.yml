@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  system_name: MyString
+  employee_name: MyString
+  coin_id: 1
+  system_id: 1
+  employee_id: 1
+
+two:
+  system_name: MyString
+  employee_name: MyString
+  coin_id: 1
+  system_id: 1
+  employee_id: 1
