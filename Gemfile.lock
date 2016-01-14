@@ -29,6 +29,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
     activejob (4.2.1)
       activesupport (= 4.2.1)
       globalid (>= 0.3.0)
@@ -49,6 +51,8 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.4.0)
+      railties (>= 3.0)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -63,7 +67,7 @@ GEM
     columnize (0.9.0)
     commonjs (0.2.7)
     debug_inspector (0.0.2)
-    devise (3.5.0)
+    devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -95,9 +99,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.5)
+    mime-types (2.6.1)
     mini_portile (0.6.2)
-    minitest (5.6.1)
+    minitest (5.7.0)
     multi_json (1.11.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -165,6 +169,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    underscore-rails (1.8.2)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.1.2)
@@ -177,6 +182,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
+  bootstrap-datepicker-rails
   byebug
   cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
@@ -192,4 +199,5 @@ DEPENDENCIES
   turbolinks
   twitter-bootswatch-rails!
   uglifier (>= 1.3.0)
+  underscore-rails (~> 1.8.2)
   web-console (~> 2.0)

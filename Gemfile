@@ -45,6 +45,18 @@ gem 'therubyracer'
 # use twitter bootstrap css & javascript toolkit
 gem 'twitter-bootswatch-rails', :github => 'scottvrosenthal/twitter-bootswatch-rails'
 
+
+# undescore
+
+gem 'underscore-rails', '~> 1.8.2'
+
+# serializer
+gem 'active_model_serializers'
+
+# datepicker
+gem 'bootstrap-datepicker-rails'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

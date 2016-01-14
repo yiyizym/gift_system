@@ -1,35 +1,121 @@
-<table class="table table-striped table-hover ">
+<table class="table table-striped table-hover employees-table ms-controller" ms-controller="employees">
 	<thead>
 		<tr>
-			<th>#</th>
 			<th>工号</th>
 			<th>姓名</th>
-			<th>获赠</th>
-			<th>可送</th>
-			<th>可用</th>
+			<th>可用持有</th>
+			<th>可用获赠</th>
+			<th>操作</th>
 		</tr>
 	</thead>
-	<tbody>
-
-		<% @employees.each_with_index do |e,index| %>
-		<tr class="info">
-			<td><%= index + 1 %></td>
-			<td><%= e.no %></td>
-			<td><%= e.name %></td>
-			<td>find_get_coins(e.id)</td>
-			<td>find_can_give_out_coins(e.id)</td>
-			<td>find_can_exchange_coins(e.id)</td>
+	<tbody >
+		<tr class="employee-item" ms-repeat="list">
+			<td>
+				<span ms-visible="editShow !== $index && el.id">{{el.no}}</span>
+				<input type="text" ms-visible="editShow === $index || !el.id" ms-duplex="el.no">
+			</td>
+			<td>
+				<span ms-visible="editShow !== $index && el.id">{{el.name}}</span>
+				<input type="text" ms-visible="editShow === $index || !el.id" ms-duplex="el.name">
+			</td>
+			<td>
+				<span>{{el.own_coins}}</span>
+			</td>
+			<td>
+				<span>{{el.get_coins}}</span>
+			</td>
+			<td>
+				<button type="button" class="btn btn-default" ms-visible="editShow !== $index && el.id" ms-click="toggleEdit($index)">{{ '编辑' }}</button>
+				<button type="button" class="btn btn-default" ms-visible="editShow === $index && el.id" ms-click="submitEdit(el),toggleEdit('')">{{ '确定' }}</button>
+				<button type="button" class="btn btn-default" ms-visible="!el.id" ms-click="submitNew(el),toggleEdit('')">{{ '确定' }}</button>
+				<button type="button" class="btn btn-default" ms-click="deleteEmployee(el)">{{ '删除' }}</button>
+			</td>
 		</tr>
-		<% end %>
 	</tbody>
 	<tfoot>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><button type="button" class="add-employee">增加员工</button></td>
+			<td colspan="5">
+				<button type="button" class="btn btn-primary add-employee" ms-click="newEmployee">增加员工</button>
+				<div ms-include-src="url"></div>
+			</td>
 		</tr>
 	</tfoot>
 </table>
+
+
+
+
+<% content_for :page_javascript do %>
+
+<script>
+	$(function(){
+			var $addEmployeeForm = $(".add-employee-form");
+			var $addEmployeeDialog = $("#add-employee-modal");
+			var MAP = {
+				'update' : 'PATCH',
+				'new' : 'POST',
+				'delete' : 'DELETE'
+			};
+
+			var submit = function(item,type){
+				$.ajax({
+					url: type === 'new' ? "/employees" : "/employees/" + item.id,
+					data: item.$model,
+					type: MAP[type],
+					success: function(resp){
+						$.ajax({
+							url: "/employees",
+							type: "GET",
+							dataType: "json",
+							success: function(resp){
+								model.list = resp.employees;
+							}
+						});
+
+					},
+					complete: function(resp){
+					}
+				});
+			};
+
+			var list =  <%= @employees.to_json.html_safe %>;
+
+			var model = window.model = avalon.define({
+				url : '<%= asset_path("ap.html") %>',
+				$id : "employees",
+				list : list,
+				editShow : '',
+				toggleEdit : function(index){
+					model.editShow = index;
+				},
+				newEmployee: function(){
+					model.list.push({
+						no: '',
+						name: '',
+						own_coins: '0',
+						get_coins: '0'
+					});
+				},
+				deleteEmployee: function(el){
+					if (el.id) {
+						model.submitDelete(el);
+					} else{
+						model.list.pop();
+					}
+				},
+				submitEdit: function(el){
+					submit(el, 'update');
+				},
+				submitNew: function(el){
+					submit(el, 'new');
+				},
+				submitDelete: function(el){
+					submit(el, 'delete');
+				}
+			});
+
+
+			
+});
+</script>
+<% end %>

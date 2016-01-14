@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :employees
+  resources :employees do
+    collection do
+      get :refresh
+    end
+  end
+
   resources :coins
   resources :publishes
+  resources :presents
+  resources :exchanges
 
   root to: 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
